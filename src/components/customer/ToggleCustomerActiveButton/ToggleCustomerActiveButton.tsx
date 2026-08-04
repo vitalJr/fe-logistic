@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { setCustomerActiveAction } from "@/app/(app)/customer/actions";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
+import { Tooltip } from "@/components/ui/Tooltip";
 import styles from "./ToggleCustomerActiveButton.module.css";
 
 type ToggleCustomerActiveButtonProps = {
@@ -69,30 +70,32 @@ export function ToggleCustomerActiveButton({
 
   if (!active) {
     return (
-      <button
-        type="button"
-        className={`${styles.iconButton} ${styles.activate}`}
-        disabled={isPending}
-        onClick={activate}
-        title="Ativar"
-        aria-label={isPending ? "Ativando cliente..." : "Ativar cliente"}
-      >
-        <CheckCircleIcon />
-      </button>
+      <Tooltip label={isPending ? "Ativando..." : "Ativar"}>
+        <button
+          type="button"
+          className={`${styles.iconButton} ${styles.activate}`}
+          disabled={isPending}
+          onClick={activate}
+          aria-label={isPending ? "Ativando cliente..." : "Ativar cliente"}
+        >
+          <CheckCircleIcon />
+        </button>
+      </Tooltip>
     );
   }
 
   return (
     <>
-      <button
-        type="button"
-        className={`${styles.iconButton} ${styles.deactivate}`}
-        onClick={() => setOpen(true)}
-        title="Desativar"
-        aria-label="Desativar cliente"
-      >
-        <BanIcon />
-      </button>
+      <Tooltip label="Desativar">
+        <button
+          type="button"
+          className={`${styles.iconButton} ${styles.deactivate}`}
+          onClick={() => setOpen(true)}
+          aria-label="Desativar cliente"
+        >
+          <BanIcon />
+        </button>
+      </Tooltip>
       <Modal open={open} onClose={() => setOpen(false)} title="Desativar cliente">
         <p className={styles.message}>
           Tem certeza que deseja desativar o cliente{" "}

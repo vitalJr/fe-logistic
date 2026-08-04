@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { setSupplierActiveAction } from "@/app/(app)/supplier/actions";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
+import { Tooltip } from "@/components/ui/Tooltip";
 import styles from "./ToggleSupplierActiveButton.module.css";
 
 type ToggleSupplierActiveButtonProps = {
@@ -69,30 +70,32 @@ export function ToggleSupplierActiveButton({
 
   if (!active) {
     return (
-      <button
-        type="button"
-        className={`${styles.iconButton} ${styles.activate}`}
-        disabled={isPending}
-        onClick={activate}
-        title="Ativar"
-        aria-label={isPending ? "Ativando fornecedor..." : "Ativar fornecedor"}
-      >
-        <CheckCircleIcon />
-      </button>
+      <Tooltip label={isPending ? "Ativando..." : "Ativar"}>
+        <button
+          type="button"
+          className={`${styles.iconButton} ${styles.activate}`}
+          disabled={isPending}
+          onClick={activate}
+          aria-label={isPending ? "Ativando fornecedor..." : "Ativar fornecedor"}
+        >
+          <CheckCircleIcon />
+        </button>
+      </Tooltip>
     );
   }
 
   return (
     <>
-      <button
-        type="button"
-        className={`${styles.iconButton} ${styles.deactivate}`}
-        onClick={() => setOpen(true)}
-        title="Desativar"
-        aria-label="Desativar fornecedor"
-      >
-        <BanIcon />
-      </button>
+      <Tooltip label="Desativar">
+        <button
+          type="button"
+          className={`${styles.iconButton} ${styles.deactivate}`}
+          onClick={() => setOpen(true)}
+          aria-label="Desativar fornecedor"
+        >
+          <BanIcon />
+        </button>
+      </Tooltip>
       <Modal open={open} onClose={() => setOpen(false)} title="Desativar fornecedor">
         <p className={styles.message}>
           Tem certeza que deseja desativar o fornecedor{" "}

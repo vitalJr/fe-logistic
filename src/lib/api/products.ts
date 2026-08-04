@@ -15,14 +15,30 @@ async function parseErrorMessage(res: Response): Promise<string> {
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const res = await fetch(PRODUCTS_ENDPOINT, {
+  const res = await fetch(`${PRODUCTS_ENDPOINT}?limit=100`, {
+    cache: "no-store",
+    next: { tags: ["products", "stock"] },
+    headers: await authHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(
+      `Falha ao buscar produtos: ${await parseErrorMessage(res)}`,
+    );
+  }
+  return productListResponseSchema.parse(await res.json()).items;
+}
+
+export async function getLowStockProducts(): Promise<Product[]> {
+  const res = await fetch(`${PRODUCTS_ENDPOINT}/low-stock`, {
     cache: "no-store",
     headers: await authHeaders(),
   });
   if (!res.ok) {
-    throw new Error(`Falha ao buscar produtos: ${await parseErrorMessage(res)}`);
+    throw new Error(
+      `Falha ao buscar produtos com estoque baixo: ${await parseErrorMessage(res)}`,
+    );
   }
-  return productListResponseSchema.parse(await res.json()).items;
+  return productListResponseSchema.shape.items.parse(await res.json());
 }
 
 export async function getProduct(id: string): Promise<Product | null> {
@@ -59,7 +75,9 @@ export async function updateProduct(
     body: JSON.stringify(data),
   });
   if (!res.ok) {
-    throw new Error(`Falha ao atualizar produto: ${await parseErrorMessage(res)}`);
+    throw new Error(
+      `Falha ao atualizar produto: ${await parseErrorMessage(res)}`,
+    );
   }
   return productSchema.parse(await res.json());
 }
@@ -70,6 +88,8 @@ export async function deleteProduct(id: string): Promise<void> {
     headers: await authHeaders(),
   });
   if (!res.ok) {
-    throw new Error(`Falha ao remover produto: ${await parseErrorMessage(res)}`);
+    throw new Error(
+      `Falha ao remover produto: ${await parseErrorMessage(res)}`,
+    );
   }
 }

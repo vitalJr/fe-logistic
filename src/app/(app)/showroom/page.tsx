@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { WarningTooltip } from "@/components/ui/WarningTooltip";
+import { Tooltip } from "@/components/ui/Tooltip";
 import { Button } from "@/components/ui/Button";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import { Sidebar } from "@/components/ui/Sidebar";
@@ -82,6 +83,26 @@ export default function ShowroomPage() {
           <Card>
             <div className={styles.row}>
               <WarningTooltip message="Complete suas informações de cadastro" />
+            </div>
+          </Card>
+        </section>
+
+        <section className={styles.section}>
+          <div>
+            <h2 className={styles.sectionTitle}>Tooltip</h2>
+            <p className={styles.sectionDescription}>
+              @/components/ui/Tooltip — envolve qualquer elemento (geralmente um
+              botão de ícone) e exibe um rótulo ao passar o mouse ou focar via
+              teclado.
+            </p>
+          </div>
+          <Card>
+            <div className={styles.row}>
+              <Tooltip label="Editar">
+                <Button size="sm" variant="secondary">
+                  ✎
+                </Button>
+              </Tooltip>
             </div>
           </Card>
         </section>

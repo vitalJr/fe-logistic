@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+function nullToUndefined(value: unknown): unknown {
+  return value === null ? undefined : value;
+}
+
 export const productUnitSchema = z.enum([
   "UN",
   "KG",
@@ -22,8 +26,11 @@ export const productSchema = z.object({
   categoryId: z.string().trim().min(1),
   unit: productUnitSchema,
   minStock: z.number().int().min(0),
-  price: z.number().nonnegative().default(0),
+  price: z.preprocess(nullToUndefined, z.number().nonnegative().default(0)),
   active: z.boolean().default(true),
+  stockQuantity: z.preprocess(nullToUndefined, z.number().default(0)),
+  averageCost: z.preprocess(nullToUndefined, z.number().optional()),
+  stockUpdatedAt: z.preprocess(nullToUndefined, z.string().trim().min(1).optional()),
 });
 
 export type Product = z.infer<typeof productSchema>;
@@ -35,6 +42,11 @@ export const productListResponseSchema = z.object({
 
 export type ProductListResponse = z.infer<typeof productListResponseSchema>;
 
-export const productFormSchema = productSchema.omit({ id: true });
+export const productFormSchema = productSchema.omit({
+  id: true,
+  stockQuantity: true,
+  averageCost: true,
+  stockUpdatedAt: true,
+});
 
 export type ProductFormValues = z.infer<typeof productFormSchema>;

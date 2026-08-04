@@ -1,0 +1,36 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sectionDescription {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.previewFrame {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--color-bg);
+}

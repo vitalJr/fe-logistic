@@ -1,0 +1,54 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.wrapper:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-warning-border);
+  color: var(--color-surface);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: -6px;
+  width: max-content;
+  max-width: 200px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 120ms ease, transform 120ms ease;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.wrapper:hover .tooltip,
+.wrapper:focus-visible .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}

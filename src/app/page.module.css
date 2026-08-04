@@ -1,142 +1,215 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg);
 }
 
-.main {
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  z-index: 0;
+  background: var(--color-accent);
+  pointer-events: none;
+}
+
+.orbOne {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -100px;
+  animation: floatOne 16s ease-in-out infinite;
+}
+
+.orbTwo {
+  width: 360px;
+  height: 360px;
+  bottom: -140px;
+  right: -80px;
+  background: var(--color-positive);
+  animation: floatTwo 18s ease-in-out infinite;
+}
+
+.nav {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  padding: var(--space-5) var(--space-6);
 }
 
-.intro {
+.brand {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
+  text-align: center;
+  gap: var(--space-5);
+  padding: var(--space-8) var(--space-5) var(--space-7);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  font-size: 12px;
   font-weight: 500;
+  color: var(--color-text-secondary);
+  animation: fadeSlideIn 0.6s ease both;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--color-text);
+  animation: fadeSlideIn 0.6s ease 0.1s both;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.description {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 520px;
+  animation: fadeSlideIn 0.6s ease 0.2s both;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  animation: fadeSlideIn 0.6s ease 0.3s both;
+}
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+.features {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-8);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-size: 16px;
+}
+
+.featureTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.featureDescription {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-5);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+@keyframes floatOne {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
   }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
+  50% {
+    transform: translate(40px, 30px) scale(1.1);
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+@keyframes floatTwo {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -20px) scale(1.05);
+  }
+}
+
+@media (max-width: 720px) {
+  .title {
+    font-size: 34px;
   }
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+  .features {
+    grid-template-columns: 1fr;
+  }
+}
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .title,
+  .description,
+  .actions {
+    animation: none;
+  }
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  .orbOne,
+  .orbTwo {
+    animation: none;
   }
 }

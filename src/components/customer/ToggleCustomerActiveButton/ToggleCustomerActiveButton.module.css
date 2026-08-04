@@ -1,0 +1,47 @@
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  cursor: pointer;
+}
+
+.iconButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.iconButton:hover {
+  background: var(--color-surface-hover);
+}
+
+.iconButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.activate {
+  color: var(--color-positive);
+}
+
+.deactivate {
+  color: var(--color-danger);
+}
+
+.message {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}

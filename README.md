@@ -1,8 +1,9 @@
 # Logistic
 
-Sistema de gestão logística — catálogo de produtos e categorias, cadastro e
-autenticação de usuários. Aplicação **Next.js (App Router)** em **TypeScript**,
-com validação via **Zod** e Server Actions para todas as mutações.
+Sistema de gestão logística — catálogo de produtos e categorias, fornecedores,
+clientes, cadastro e autenticação de usuários. Aplicação **Next.js (App
+Router)** em **TypeScript**, com validação via **Zod** e Server Actions para
+todas as mutações.
 
 Consulte [AGENTS.md](./AGENTS.md) para as convenções de código e estrutura de
 pastas do projeto.
@@ -57,4 +58,7 @@ A aplicação sobe em [http://localhost:3001](http://localhost:3001).
   indicação visual dos campos pendentes
 - **Categorias** — CRUD completo
 - **Produtos** — CRUD completo, com categoria, unidade, estoque mínimo e preço
+- **Fornecedores** — CRUD, busca por nome/NIF, bloqueio de NIF duplicado e
+  ativar/desativar direto na lista (desativar exige confirmação)
+- **Clientes** — mesmas funcionalidades de fornecedores
 - **Showroom** (`/showroom`) — catálogo dos componentes reutilizáveis de UI
